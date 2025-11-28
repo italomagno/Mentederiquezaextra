@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente de Riqueza Extra | Premium</title>
+    
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --glass-bg: rgba(20, 20, 20, 0.65);
+            --glass-border: rgba(212, 175, 55, 0.15);
+            --text-color: #ffffff;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --gold-color: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- FUNDO ANIMADO (AMEBA) --- */
+        .background-fx {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .blob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: floatBlob 15s infinite ease-in-out alternate;
+            transform: translate(-50%, -50%);
+            opacity: 0.8;
+        }
+
+        .blob:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(160, 120, 20, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+            animation-duration: 25s;
+            animation-direction: alternate-reverse;
+            top: 20%;
+            left: 80%;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-30%, -60%) scale(1.2); }
+            100% { transform: translate(-70%, -40%) scale(0.9); }
+        }
+
+        /* --- CONTAINER PRINCIPAL GLASSMORPHISM --- */
+        .glass-container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px); /* O segredo do vidro */
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+            padding: 30px 20px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        /* --- TIPOGRAFIA --- */
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            padding: 3px;
+            background: linear-gradient(180deg, #222, #000);
+        }
+
+        .profile-glow {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            animation: pulseGlow 3s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- BOTÕES PREMIUM --- */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn i {
+            margin-right: 12px;
+            color: var(--gold-color);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Efeito de brilho ao passar o mouse */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            border-color: var(--gold-color);
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn:hover i {
+            transform: scale(1.2);
+            color: #FCF6BA; 
+        }
+
+        /* Botão Destaque (Gradiente Ouro) */
+        .btn-fill {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+        .btn-fill i { color: #000; }
+        .btn-fill:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #FCF6BA, #BF953F); 
+        }
+
+        /* --- TRANSIÇÕES DE PÁGINA --- */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger Animation (Itens aparecendo um por um) */
+        .animate-item {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: slideUp 0.5s forwards;
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Atrasos na animação */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* --- CARDS INTERNOS --- */
+        .card-premium {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .tag-price {
+            background: var(--gold-gradient);
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* --- UTILITÁRIOS --- */
+        .section-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0 15px 0;
+        }
+        .section-separator span {
+            background: #000; /* Fundo do texto para quebrar a linha */
+            padding: 0 10px;
+            color: var(--gold-color);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .back-link:hover { color: var(--gold-color); padding-left: 5px; }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- FUNDO COM AMEBA ANIMADA -->
+    <div class="background-fx">
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <!-- CONTAINER VIDRO FOSCO -->
+    <div class="glass-container">
+        
+        <!-- HEADER -->
+        <header>
+            <div class="profile-wrapper">
+                <div class="profile-glow"></div>
+                <!-- Coloque sua foto aqui -->
+                <img src="https://ui-avatars.com/api/?name=MR&background=000&color=D4AF37&size=200&font-size=0.33" alt="Perfil" class="profile-img">
+            </div>
+            <h1 class="gold-text">Mente de Riqueza</h1>
+            <p class="subtitle">Estratégias de Renda Extra & Produtos Digitais</p>
+        </header>
+
+        <!-- ================= HOME ================= -->
+        <div id="home" class="page active">
+            
+            <div class="section-separator animate-item delay-1"><span>Comece Aqui</span></div>
+
+            <a onclick="navigateTo('guide')" class="btn btn-fill animate-item delay-2">
+                <i class="fa-solid fa-rocket"></i> Guia: Primeiros Passos (Grátis)
+            </a>
+            
+            <div class="section-separator animate-item delay-3"><span>Ferramentas & Aulas</span></div>
+            
+            <a onclick="navigateTo('tools')" class="btn animate-item delay-4">
+                <i class="fa-solid fa-microchip"></i> Ferramentas que Pagam em Dólar
+            </a>
+            <a onclick="navigateTo('classes')" class="btn animate-item delay-4">
+                <i class="fa-solid fa-play"></i> Aulas Gratuitas (Curso Express)
+            </a>
+
+            <div class="section-separator animate-item"><span>Loja Oficial</span></div>
+
+            <a onclick="navigateTo('products')" class="btn animate-item">
+                <i class="fa-solid fa-crown"></i> Produtos Premium & Mentorias
+            </a>
+
+            <div class="section-separator animate-item"><span>Redes Sociais</span></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;" class="animate-item">
+                <a href="#" class="btn" style="padding: 15px; justify-content: center;"><i class="fa-brands fa-whatsapp" style="margin:0;"></i></a>
+                <a href="#" class="btn" style="padding: 15px; justify-content: center;"><i class="fa-brands fa-instagram" style="margin:0;"></i></a>
+                <a href="#" class="btn" style="padding: 15px; justify-content: center;"><i class="fa-brands fa-tiktok" style="margin:0;"></i></a>
+                <a href="#" class="btn" style="padding: 15px; justify-content: center;"><i class="fa-brands fa-youtube" style="margin:0;"></i></a>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA: GUIA ================= -->
+        <div id="guide" class="page">
+            <a onclick="navigateTo('home')" class="back-link"><i class="fa-solid fa-chevron-left"></i> Voltar ao Início</a>
+            
+            <div class="card-premium">
+                <h2 class="gold-text" style="font-size: 1.2rem; margin-bottom:10px;">O Mapa da Mina</h2>
+                <p style="font-size: 0.9rem; color: #ddd; margin-bottom: 15px;">
+                    Começar no digital não precisa ser difícil. O segredo é seguir o rastro do dinheiro nas micro-tarefas e na venda de infoprodutos.
+                </p>
+                <div style="background: rgba(212, 175, 55, 0.1); padding: 15px; border-left: 3px solid var(--gold-color); margin-bottom: 15px;">
+                    <strong style="color: var(--gold-color);">Passo 1:</strong> Cadastre-se nas ferramentas.<br>
+                    <strong style="color: var(--gold-color);">Passo 2:</strong> Assista à Aula 1.<br>
+                    <strong style="color: var(--gold-color);">Passo 3:</strong> Faça seus primeiros $10 hoje.
+                </div>
+                <button class="btn btn-fill">Baixar Checklist PDF</button>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA: FERRAMENTAS ================= -->
+        <div id="tools" class="page">
+            <a onclick="navigateTo('home')" class="back-link"><i class="fa-solid fa-chevron-left"></i> Voltar</a>
+            <h2 style="text-align:center; margin-bottom: 20px;">Apps Lucrativos</h2>
+
+            <div class="card-premium animate-item delay-1">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#fff;">Toloka</h3>
+                    <i class="fa-solid fa-coins" style="color: var(--gold-color);"></i>
+                </div>
+                <p style="font-size:0.8rem; color:#aaa; margin: 10px 0;">Tarefas simples de IA. Pagamento via PayPal.</p>
+                <a href="#" class="btn" style="margin-bottom:0; font-size:0.8rem;">Acessar Toloka</a>
+            </div>
+
+            <div class="card-premium animate-item delay-2">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#fff;">Remotasks</h3>
+                    <i class="fa-solid fa-robot" style="color: var(--gold-color);"></i>
+                </div>
+                <p style="font-size:0.8rem; color:#aaa; margin: 10px 0;">Treinamento de LIDAR e dados para IA.</p>
+                <a href="#" class="btn" style="margin-bottom:0; font-size:0.8rem;">Acessar Remotasks</a>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA: AULAS ================= -->
+        <div id="classes" class="page">
+            <a onclick="navigateTo('home')" class="back-link"><i class="fa-solid fa-chevron-left"></i> Voltar</a>
+            <h2 style="text-align:center; margin-bottom: 20px;">Academy Free</h2>
+
+            <div class="card-premium animate-item delay-1">
+                <div style="width:100%; height:150px; background:#111; display:flex; align-items:center; justify-content:center; border-radius:8px; margin-bottom:15px; border:1px solid #333;">
+                    <i class="fa-regular fa-circle-play" style="font-size:3rem; color:var(--gold-color);"></i>
+                </div>
+                <h3>Aula 01: O Início</h3>
+                <p style="font-size:0.8rem; color:#ccc;">Como configurar sua mentalidade e carteiras digitais.</p>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA: PRODUTOS ================= -->
+        <div id="products" class="page">
+            <a onclick="navigateTo('home')" class="back-link"><i class="fa-solid fa-chevron-left"></i> Voltar</a>
+            <h2 style="text-align:center; margin-bottom: 25px;" class="gold-text">Loja VIP</h2>
+
+            <div class="card-premium animate-item delay-1" style="border: 1px solid rgba(212, 175, 55, 0.4);">
+                <span class="tag-price">R$ 29,90</span>
+                <h3>Pack de Prompts Mestre</h3>
+                <p style="font-size:0.85rem; color:#ccc; margin:10px 0;">500 comandos de Copywriting e Vendas para ChatGPT. Copie e cole para lucrar.</p>
+                <button class="btn btn-fill">Comprar Agora</button>
+            </div>
+
+            <div class="card-premium animate-item delay-2">
+                <span class="tag-price">R$ 17,00</span>
+                <h3>Planilha Gestão Dollar</h3>
+                <p style="font-size:0.85rem; color:#ccc; margin:10px 0;">Planilha automatizada para converter e gerenciar ganhos.</p>
+                <button class="btn">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Mente de Riqueza Extra © 2025</p>
+            <p style="margin-top:5px; font-size:0.6rem; opacity:0.5;">Design Premium Mode</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function navigateTo(pageId) {
+            // Remove a classe ativa da página atual
+            const activePage = document.querySelector('.page.active');
+            if(activePage) {
+                activePage.style.opacity = '0';
+                activePage.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    activePage.classList.remove('active');
+                    activePage.style.transform = ''; // Reset
+                    
+                    // Ativa a nova página
+                    const target = document.getElementById(pageId);
+                    if(target) {
+                        target.classList.add('active');
+                        // Reinicia as animações dos itens
+                        const items = target.querySelectorAll('.animate-item');
+                        items.forEach(el => {
+                            el.style.animation = 'none';
+                            el.offsetHeight; /* trigger reflow */
+                            el.style.animation = null; 
+                        });
+                        
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }, 400); // Espera a transição de saída terminar
+            }
+        }
+    </script>
+</body>
+</html>
